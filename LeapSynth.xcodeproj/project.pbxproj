@@ -18,6 +18,9 @@
 		B34F575718668ED4003EDDAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F573618668ED4003EDDAC /* Cocoa.framework */; };
 		B34F575F18668ED4003EDDAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B34F575D18668ED4003EDDAC /* InfoPlist.strings */; };
 		B34F576118668ED4003EDDAC /* LeapSynthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B34F576018668ED4003EDDAC /* LeapSynthTests.m */; };
+		B34F576F18668F56003EDDAC /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */; };
+		B34F577618669140003EDDAC /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F577518669140003EDDAC /* libLeap.dylib */; };
+		B34F57771866914C003EDDAC /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B34F577518669140003EDDAC /* libLeap.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,19 @@
 			remoteInfo = LeapSynth;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B34F577318668FAB003EDDAC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				B34F57771866914C003EDDAC /* libLeap.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B34F573318668ED4003EDDAC /* LeapSynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeapSynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +66,11 @@
 		B34F575C18668ED4003EDDAC /* LeapSynthTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LeapSynthTests-Info.plist"; sourceTree = "<group>"; };
 		B34F575E18668ED4003EDDAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B34F576018668ED4003EDDAC /* LeapSynthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeapSynthTests.m; sourceTree = "<group>"; };
+		B34F576A18668F56003EDDAC /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Leap.h; path = External/LeapMotion/Leap.h; sourceTree = "<group>"; };
+		B34F576B18668F56003EDDAC /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeapMath.h; path = External/LeapMotion/LeapMath.h; sourceTree = "<group>"; };
+		B34F576C18668F56003EDDAC /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeapObjectiveC.h; path = External/LeapMotion/LeapObjectiveC.h; sourceTree = "<group>"; };
+		B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LeapObjectiveC.mm; path = External/LeapMotion/LeapObjectiveC.mm; sourceTree = "<group>"; };
+		B34F577518669140003EDDAC /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34F577618669140003EDDAC /* libLeap.dylib in Frameworks */,
 				B34F573718668ED4003EDDAC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +98,7 @@
 		B34F572A18668ED4003EDDAC = {
 			isa = PBXGroup;
 			children = (
+				B34F577118668F76003EDDAC /* LeapMotion */,
 				B34F573C18668ED4003EDDAC /* LeapSynth */,
 				B34F575A18668ED4003EDDAC /* LeapSynthTests */,
 				B34F573518668ED4003EDDAC /* Frameworks */,
@@ -95,6 +118,7 @@
 		B34F573518668ED4003EDDAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B34F577518669140003EDDAC /* libLeap.dylib */,
 				B34F573618668ED4003EDDAC /* Cocoa.framework */,
 				B34F575518668ED4003EDDAC /* XCTest.framework */,
 				B34F573818668ED4003EDDAC /* Other Frameworks */,
@@ -154,6 +178,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B34F577118668F76003EDDAC /* LeapMotion */ = {
+			isa = PBXGroup;
+			children = (
+				B34F576A18668F56003EDDAC /* Leap.h */,
+				B34F576B18668F56003EDDAC /* LeapMath.h */,
+				B34F576C18668F56003EDDAC /* LeapObjectiveC.h */,
+				B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */,
+			);
+			name = LeapMotion;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,6 +199,7 @@
 				B34F572F18668ED4003EDDAC /* Sources */,
 				B34F573018668ED4003EDDAC /* Frameworks */,
 				B34F573118668ED4003EDDAC /* Resources */,
+				B34F577318668FAB003EDDAC /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -253,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34F576F18668F56003EDDAC /* LeapObjectiveC.mm in Sources */,
 				B34F574318668ED4003EDDAC /* main.m in Sources */,
 				B34F574A18668ED4003EDDAC /* LSAppDelegate.m in Sources */,
 			);
@@ -384,10 +421,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
 				INFOPLIST_FILE = "LeapSynth/LeapSynth-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Connor/Mobile\\ Apps/LeapSynth",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -397,10 +440,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
 				INFOPLIST_FILE = "LeapSynth/LeapSynth-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Connor/Mobile\\ Apps/LeapSynth",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -465,6 +514,7 @@
 				B34F576618668ED4003EDDAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B34F576718668ED4003EDDAC /* Build configuration list for PBXNativeTarget "LeapSynthTests" */ = {
 			isa = XCConfigurationList;
@@ -473,6 +523,7 @@
 				B34F576918668ED4003EDDAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
