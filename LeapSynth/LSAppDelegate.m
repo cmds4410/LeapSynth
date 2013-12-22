@@ -7,12 +7,13 @@
 //
 
 #import "LSAppDelegate.h"
+#import "LSLeapManager.h"
 
 @implementation LSAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    [LSLeapManager sharedLeapManager];
 }
 
 @end

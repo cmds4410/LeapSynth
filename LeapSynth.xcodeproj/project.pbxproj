@@ -21,6 +21,7 @@
 		B34F576F18668F56003EDDAC /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */; };
 		B34F577618669140003EDDAC /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F577518669140003EDDAC /* libLeap.dylib */; };
 		B34F57771866914C003EDDAC /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B34F577518669140003EDDAC /* libLeap.dylib */; };
+		B3BC21AC186756ED00480171 /* LSLeapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3BC21AB186756ED00480171 /* LSLeapManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		B34F576C18668F56003EDDAC /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeapObjectiveC.h; path = External/LeapMotion/LeapObjectiveC.h; sourceTree = "<group>"; };
 		B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LeapObjectiveC.mm; path = External/LeapMotion/LeapObjectiveC.mm; sourceTree = "<group>"; };
 		B34F577518669140003EDDAC /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		B3BC21AA186756ED00480171 /* LSLeapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLeapManager.h; sourceTree = "<group>"; };
+		B3BC21AB186756ED00480171 /* LSLeapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSLeapManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,8 @@
 				B34F574B18668ED4003EDDAC /* MainMenu.xib */,
 				B34F574E18668ED4003EDDAC /* Images.xcassets */,
 				B34F573D18668ED4003EDDAC /* Supporting Files */,
+				B3BC21AA186756ED00480171 /* LSLeapManager.h */,
+				B3BC21AB186756ED00480171 /* LSLeapManager.m */,
 			);
 			path = LeapSynth;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			files = (
 				B34F576F18668F56003EDDAC /* LeapObjectiveC.mm in Sources */,
 				B34F574318668ED4003EDDAC /* main.m in Sources */,
+				B3BC21AC186756ED00480171 /* LSLeapManager.m in Sources */,
 				B34F574A18668ED4003EDDAC /* LSAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
