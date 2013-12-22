@@ -79,10 +79,11 @@
     
     // Get the most recent frame and report some basic information
     LeapFrame *frame = [aController frame:0];
-    
+    /*
     NSLog(@"Frame id: %lld, timestamp: %lld, hands: %ld, fingers: %ld, tools: %ld, gestures: %ld",
           [frame id], [frame timestamp], [[frame hands] count],
           [[frame fingers] count], [[frame tools] count], [[frame gestures:nil] count]);
+     */
     
     if ([[frame hands] count] != 0) {
         // Get the first hand
@@ -98,11 +99,14 @@
                 avgPos = [avgPos plus:[finger tipPosition]];
             }
             avgPos = [avgPos divide:[fingers count]];
+            /*
             NSLog(@"Hand has %ld fingers, average finger tip position %@",
                   [fingers count], avgPos);
+             */
         }
         
         // Get the hand's sphere radius and palm position
+        /*
         NSLog(@"Hand sphere radius: %f mm, palm position: %@",
               [hand sphereRadius], [hand palmPosition]);
         
@@ -111,10 +115,12 @@
         const LeapVector *direction = [hand direction];
         
         // Calculate the hand's pitch, roll, and yaw angles
+         
         NSLog(@"Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n",
               [direction pitch] * LEAP_RAD_TO_DEG,
               [normal roll] * LEAP_RAD_TO_DEG,
               [direction yaw] * LEAP_RAD_TO_DEG);
+         */
     }
     
     NSArray *gestures = [frame gestures:nil];
@@ -170,10 +176,11 @@
                 break;
         }
     }
-    
+    /*
     if (([[frame hands] count] > 0) || [[frame gestures:nil] count] > 0) {
         NSLog(@" ");
     }
+     */
 }
 
 - (void)onFocusGained:(NSNotification *)notification

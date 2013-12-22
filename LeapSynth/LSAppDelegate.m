@@ -8,12 +8,20 @@
 
 #import "LSAppDelegate.h"
 #import "LSLeapManager.h"
+#import "LSLeapSynth.h"
+
+@interface LSAppDelegate ()
+
+@property (strong, nonatomic) LSLeapSynth *leapSynth;
+
+@end
 
 @implementation LSAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [LSLeapManager sharedLeapManager];
+    self.leapSynth = [[LSLeapSynth alloc] init];
+    [self.leapSynth run];
 }
 
 @end

@@ -19,9 +19,18 @@
 		B34F575F18668ED4003EDDAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B34F575D18668ED4003EDDAC /* InfoPlist.strings */; };
 		B34F576118668ED4003EDDAC /* LeapSynthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B34F576018668ED4003EDDAC /* LeapSynthTests.m */; };
 		B34F576F18668F56003EDDAC /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */; };
-		B34F577618669140003EDDAC /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F577518669140003EDDAC /* libLeap.dylib */; };
-		B34F57771866914C003EDDAC /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B34F577518669140003EDDAC /* libLeap.dylib */; };
+		B3AAF0C8186788890077CB25 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AAF0C7186788880077CB25 /* libLeap.dylib */; };
+		B3AAF0C91867889A0077CB25 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B3AAF0C7186788880077CB25 /* libLeap.dylib */; };
+		B3AAF0D3186789070077CB25 /* libTonic-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AAF0D0186788FE0077CB25 /* libTonic-OSX.a */; };
+		B3AAF0DB18678F1C0077CB25 /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3AAF0D818678F1C0077CB25 /* TonicSynthManager.mm */; };
+		B3AAF0DC18678F1C0077CB25 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = B3AAF0DA18678F1C0077CB25 /* Novocaine.m */; };
+		B3AAF0DF18678F3B0077CB25 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3AAF0DE18678F3B0077CB25 /* RingBuffer.mm */; };
+		B3AAF0E118678F750077CB25 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AAF0E018678F750077CB25 /* AudioUnit.framework */; };
+		B3AAF0E518678FC50077CB25 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AAF0E418678FC50077CB25 /* CoreAudio.framework */; };
 		B3BC21AC186756ED00480171 /* LSLeapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3BC21AB186756ED00480171 /* LSLeapManager.m */; };
+		B3BC21AF18676AAD00480171 /* LSLeapSynth.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3BC21AE18676AAD00480171 /* LSLeapSynth.mm */; };
+		B3BC25E2186777D900480171 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC25E1186777D900480171 /* AudioToolbox.framework */; };
+		B3BC25E4186777E600480171 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC25E3186777E600480171 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +41,27 @@
 			remoteGlobalIDString = B34F573218668ED4003EDDAC;
 			remoteInfo = LeapSynth;
 		};
+		B3AAF0CF186788FE0077CB25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AAF0CA186788FE0077CB25 /* TonicLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01F72690171520F900EBB4BB;
+			remoteInfo = "Tonic-OSX";
+		};
+		B3AAF0D1186788FE0077CB25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AAF0CA186788FE0077CB25 /* TonicLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F23A7CF1171B3D2E00AE8353;
+			remoteInfo = "Tonic-iOS";
+		};
+		B3AAF0D41867890D0077CB25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AAF0CA186788FE0077CB25 /* TonicLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 01F7268F171520F900EBB4BB;
+			remoteInfo = "Tonic-OSX";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				B34F57771866914C003EDDAC /* libLeap.dylib in CopyFiles */,
+				B3AAF0C91867889A0077CB25 /* libLeap.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,9 +101,23 @@
 		B34F576B18668F56003EDDAC /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeapMath.h; path = External/LeapMotion/LeapMath.h; sourceTree = "<group>"; };
 		B34F576C18668F56003EDDAC /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeapObjectiveC.h; path = External/LeapMotion/LeapObjectiveC.h; sourceTree = "<group>"; };
 		B34F576D18668F56003EDDAC /* LeapObjectiveC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LeapObjectiveC.mm; path = External/LeapMotion/LeapObjectiveC.mm; sourceTree = "<group>"; };
-		B34F577518669140003EDDAC /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		B3AAF0C7186788880077CB25 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		B3AAF0CA186788FE0077CB25 /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = External/Tonic/lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
+		B3AAF0D718678F1C0077CB25 /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TonicSynthManager.h; path = External/Tonic/Novocaine/TonicSynthManager.h; sourceTree = "<group>"; };
+		B3AAF0D818678F1C0077CB25 /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TonicSynthManager.mm; path = External/Tonic/Novocaine/TonicSynthManager.mm; sourceTree = "<group>"; };
+		B3AAF0D918678F1C0077CB25 /* Novocaine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Novocaine.h; path = External/Tonic/Novocaine/Novocaine.h; sourceTree = "<group>"; };
+		B3AAF0DA18678F1C0077CB25 /* Novocaine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Novocaine.m; path = External/Tonic/Novocaine/Novocaine.m; sourceTree = "<group>"; };
+		B3AAF0DD18678F3B0077CB25 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RingBuffer.h; path = External/Tonic/Novocaine/RingBuffer.h; sourceTree = "<group>"; };
+		B3AAF0DE18678F3B0077CB25 /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RingBuffer.mm; path = External/Tonic/Novocaine/RingBuffer.mm; sourceTree = "<group>"; };
+		B3AAF0E018678F750077CB25 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		B3AAF0E418678FC50077CB25 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		B3BC21AA186756ED00480171 /* LSLeapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLeapManager.h; sourceTree = "<group>"; };
 		B3BC21AB186756ED00480171 /* LSLeapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSLeapManager.m; sourceTree = "<group>"; };
+		B3BC21AD18676AAD00480171 /* LSLeapSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLeapSynth.h; sourceTree = "<group>"; };
+		B3BC21AE18676AAD00480171 /* LSLeapSynth.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LSLeapSynth.mm; sourceTree = "<group>"; };
+		B3BC25E1186777D900480171 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B3BC25E3186777E600480171 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B3FFABF918677928007C2E1B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +125,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B34F577618669140003EDDAC /* libLeap.dylib in Frameworks */,
+				B3AAF0E518678FC50077CB25 /* CoreAudio.framework in Frameworks */,
+				B3AAF0E118678F750077CB25 /* AudioUnit.framework in Frameworks */,
+				B3AAF0D3186789070077CB25 /* libTonic-OSX.a in Frameworks */,
+				B3AAF0C8186788890077CB25 /* libLeap.dylib in Frameworks */,
+				B3BC25E4186777E600480171 /* Accelerate.framework in Frameworks */,
+				B3BC25E2186777D900480171 /* AudioToolbox.framework in Frameworks */,
 				B34F573718668ED4003EDDAC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +150,7 @@
 		B34F572A18668ED4003EDDAC = {
 			isa = PBXGroup;
 			children = (
+				B3AAF0D618678ECC0077CB25 /* Tonic */,
 				B34F577118668F76003EDDAC /* LeapMotion */,
 				B34F573C18668ED4003EDDAC /* LeapSynth */,
 				B34F575A18668ED4003EDDAC /* LeapSynthTests */,
@@ -121,7 +171,12 @@
 		B34F573518668ED4003EDDAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B34F577518669140003EDDAC /* libLeap.dylib */,
+				B3AAF0E418678FC50077CB25 /* CoreAudio.framework */,
+				B3AAF0E018678F750077CB25 /* AudioUnit.framework */,
+				B3AAF0C7186788880077CB25 /* libLeap.dylib */,
+				B3FFABF918677928007C2E1B /* CoreGraphics.framework */,
+				B3BC25E3186777E600480171 /* Accelerate.framework */,
+				B3BC25E1186777D900480171 /* AudioToolbox.framework */,
 				B34F573618668ED4003EDDAC /* Cocoa.framework */,
 				B34F575518668ED4003EDDAC /* XCTest.framework */,
 				B34F573818668ED4003EDDAC /* Other Frameworks */,
@@ -149,6 +204,8 @@
 				B34F573D18668ED4003EDDAC /* Supporting Files */,
 				B3BC21AA186756ED00480171 /* LSLeapManager.h */,
 				B3BC21AB186756ED00480171 /* LSLeapManager.m */,
+				B3BC21AD18676AAD00480171 /* LSLeapSynth.h */,
+				B3BC21AE18676AAD00480171 /* LSLeapSynth.mm */,
 			);
 			path = LeapSynth;
 			sourceTree = "<group>";
@@ -194,6 +251,29 @@
 			name = LeapMotion;
 			sourceTree = "<group>";
 		};
+		B3AAF0CB186788FE0077CB25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3AAF0D0186788FE0077CB25 /* libTonic-OSX.a */,
+				B3AAF0D2186788FE0077CB25 /* libTonic-iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B3AAF0D618678ECC0077CB25 /* Tonic */ = {
+			isa = PBXGroup;
+			children = (
+				B3AAF0D718678F1C0077CB25 /* TonicSynthManager.h */,
+				B3AAF0D818678F1C0077CB25 /* TonicSynthManager.mm */,
+				B3AAF0D918678F1C0077CB25 /* Novocaine.h */,
+				B3AAF0DA18678F1C0077CB25 /* Novocaine.m */,
+				B3AAF0DD18678F3B0077CB25 /* RingBuffer.h */,
+				B3AAF0DE18678F3B0077CB25 /* RingBuffer.mm */,
+				B3AAF0CA186788FE0077CB25 /* TonicLib.xcodeproj */,
+			);
+			name = Tonic;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,6 +289,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B3AAF0D51867890D0077CB25 /* PBXTargetDependency */,
 			);
 			name = LeapSynth;
 			productName = LeapSynth;
@@ -259,6 +340,12 @@
 			mainGroup = B34F572A18668ED4003EDDAC;
 			productRefGroup = B34F573418668ED4003EDDAC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B3AAF0CB186788FE0077CB25 /* Products */;
+					ProjectRef = B3AAF0CA186788FE0077CB25 /* TonicLib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B34F573218668ED4003EDDAC /* LeapSynth */,
@@ -266,6 +353,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B3AAF0D0186788FE0077CB25 /* libTonic-OSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libTonic-OSX.a";
+			remoteRef = B3AAF0CF186788FE0077CB25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B3AAF0D2186788FE0077CB25 /* libTonic-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libTonic-iOS.a";
+			remoteRef = B3AAF0D1186788FE0077CB25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B34F573118668ED4003EDDAC /* Resources */ = {
@@ -297,7 +401,11 @@
 				B34F576F18668F56003EDDAC /* LeapObjectiveC.mm in Sources */,
 				B34F574318668ED4003EDDAC /* main.m in Sources */,
 				B3BC21AC186756ED00480171 /* LSLeapManager.m in Sources */,
+				B3AAF0DC18678F1C0077CB25 /* Novocaine.m in Sources */,
 				B34F574A18668ED4003EDDAC /* LSAppDelegate.m in Sources */,
+				B3AAF0DB18678F1C0077CB25 /* TonicSynthManager.mm in Sources */,
+				B3BC21AF18676AAD00480171 /* LSLeapSynth.mm in Sources */,
+				B3AAF0DF18678F3B0077CB25 /* RingBuffer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +424,11 @@
 			isa = PBXTargetDependency;
 			target = B34F573218668ED4003EDDAC /* LeapSynth */;
 			targetProxy = B34F575818668ED4003EDDAC /* PBXContainerItemProxy */;
+		};
+		B3AAF0D51867890D0077CB25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tonic-OSX";
+			targetProxy = B3AAF0D41867890D0077CB25 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -432,10 +545,21 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					External/Tonic/src,
+					External/The,
+					Amazing,
+					Audio,
+					Engine/TheAmazingAudioEngine,
+				);
 				INFOPLIST_FILE = "LeapSynth/LeapSynth-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Connor/Mobile\\ Apps/LeapSynth",
+					"/Users/Connor/Mobile\\ Apps/LeapSynth/External/Tonic/lib/build/TonicLib.build/Debug-iphoneos/Tonic-iOS.build/Objects-normal/armv7",
+					"/Users/Connor/Mobile\\ Apps/LeapSynth/External/Tonic/lib/build/TonicLib.build/Debug-iphoneos/Tonic-iOS.build/Objects-normal/armv7s",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -451,10 +575,21 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					External/Tonic/src,
+					External/The,
+					Amazing,
+					Audio,
+					Engine/TheAmazingAudioEngine,
+				);
 				INFOPLIST_FILE = "LeapSynth/LeapSynth-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Connor/Mobile\\ Apps/LeapSynth",
+					"/Users/Connor/Mobile\\ Apps/LeapSynth/External/Tonic/lib/build/TonicLib.build/Debug-iphoneos/Tonic-iOS.build/Objects-normal/armv7",
+					"/Users/Connor/Mobile\\ Apps/LeapSynth/External/Tonic/lib/build/TonicLib.build/Debug-iphoneos/Tonic-iOS.build/Objects-normal/armv7s",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>77203A72-A807-45B4-A6F5-F54259CA31E5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LeapSynth</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3888E5F0-8A89-4882-9AC1-CC204A43987B</key>
+		<string>ssh://github.com/TonicAudio/Tonic.git</string>
+		<key>66D390B5-18F0-4D84-8A32-8B3923E235AB</key>
+		<string>ssh://github.com/cmds4410/LeapSynth.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LeapSynth.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3888E5F0-8A89-4882-9AC1-CC204A43987B</key>
+		<string>../../External/Tonic</string>
+		<key>66D390B5-18F0-4D84-8A32-8B3923E235AB</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/cmds4410/LeapSynth.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>66D390B5-18F0-4D84-8A32-8B3923E235AB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>66D390B5-18F0-4D84-8A32-8B3923E235AB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LeapSynth</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3888E5F0-8A89-4882-9AC1-CC204A43987B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tonic</string>
+		</dict>
+	</array>
+</dict>
+</plist>
