@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B34F573718668ED4003EDDAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F573618668ED4003EDDAC /* Cocoa.framework */; };
+		B34F574118668ED4003EDDAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B34F573F18668ED4003EDDAC /* InfoPlist.strings */; };
+		B34F574318668ED4003EDDAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B34F574218668ED4003EDDAC /* main.m */; };
+		B34F574718668ED4003EDDAC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B34F574518668ED4003EDDAC /* Credits.rtf */; };
+		B34F574A18668ED4003EDDAC /* LSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B34F574918668ED4003EDDAC /* LSAppDelegate.m */; };
+		B34F574D18668ED4003EDDAC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34F574B18668ED4003EDDAC /* MainMenu.xib */; };
+		B34F574F18668ED4003EDDAC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B34F574E18668ED4003EDDAC /* Images.xcassets */; };
+		B34F575618668ED4003EDDAC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F575518668ED4003EDDAC /* XCTest.framework */; };
+		B34F575718668ED4003EDDAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34F573618668ED4003EDDAC /* Cocoa.framework */; };
+		B34F575F18668ED4003EDDAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B34F575D18668ED4003EDDAC /* InfoPlist.strings */; };
+		B34F576118668ED4003EDDAC /* LeapSynthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B34F576018668ED4003EDDAC /* LeapSynthTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B34F575818668ED4003EDDAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B34F572B18668ED4003EDDAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B34F573218668ED4003EDDAC;
+			remoteInfo = LeapSynth;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B34F573318668ED4003EDDAC /* LeapSynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeapSynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B34F573618668ED4003EDDAC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		B34F573918668ED4003EDDAC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		B34F573A18668ED4003EDDAC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B34F573B18668ED4003EDDAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B34F573E18668ED4003EDDAC /* LeapSynth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LeapSynth-Info.plist"; sourceTree = "<group>"; };
+		B34F574018668ED4003EDDAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B34F574218668ED4003EDDAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B34F574418668ED4003EDDAC /* LeapSynth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LeapSynth-Prefix.pch"; sourceTree = "<group>"; };
+		B34F574618668ED4003EDDAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		B34F574818668ED4003EDDAC /* LSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAppDelegate.h; sourceTree = "<group>"; };
+		B34F574918668ED4003EDDAC /* LSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAppDelegate.m; sourceTree = "<group>"; };
+		B34F574C18668ED4003EDDAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B34F574E18668ED4003EDDAC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B34F575418668ED4003EDDAC /* LeapSynthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeapSynthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B34F575518668ED4003EDDAC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		B34F575C18668ED4003EDDAC /* LeapSynthTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LeapSynthTests-Info.plist"; sourceTree = "<group>"; };
+		B34F575E18668ED4003EDDAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B34F576018668ED4003EDDAC /* LeapSynthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeapSynthTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B34F573018668ED4003EDDAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34F573718668ED4003EDDAC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B34F575118668ED4003EDDAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34F575718668ED4003EDDAC /* Cocoa.framework in Frameworks */,
+				B34F575618668ED4003EDDAC /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B34F572A18668ED4003EDDAC = {
+			isa = PBXGroup;
+			children = (
+				B34F573C18668ED4003EDDAC /* LeapSynth */,
+				B34F575A18668ED4003EDDAC /* LeapSynthTests */,
+				B34F573518668ED4003EDDAC /* Frameworks */,
+				B34F573418668ED4003EDDAC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B34F573418668ED4003EDDAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B34F573318668ED4003EDDAC /* LeapSynth.app */,
+				B34F575418668ED4003EDDAC /* LeapSynthTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B34F573518668ED4003EDDAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B34F573618668ED4003EDDAC /* Cocoa.framework */,
+				B34F575518668ED4003EDDAC /* XCTest.framework */,
+				B34F573818668ED4003EDDAC /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B34F573818668ED4003EDDAC /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B34F573918668ED4003EDDAC /* AppKit.framework */,
+				B34F573A18668ED4003EDDAC /* CoreData.framework */,
+				B34F573B18668ED4003EDDAC /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		B34F573C18668ED4003EDDAC /* LeapSynth */ = {
+			isa = PBXGroup;
+			children = (
+				B34F574818668ED4003EDDAC /* LSAppDelegate.h */,
+				B34F574918668ED4003EDDAC /* LSAppDelegate.m */,
+				B34F574B18668ED4003EDDAC /* MainMenu.xib */,
+				B34F574E18668ED4003EDDAC /* Images.xcassets */,
+				B34F573D18668ED4003EDDAC /* Supporting Files */,
+			);
+			path = LeapSynth;
+			sourceTree = "<group>";
+		};
+		B34F573D18668ED4003EDDAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B34F573E18668ED4003EDDAC /* LeapSynth-Info.plist */,
+				B34F573F18668ED4003EDDAC /* InfoPlist.strings */,
+				B34F574218668ED4003EDDAC /* main.m */,
+				B34F574418668ED4003EDDAC /* LeapSynth-Prefix.pch */,
+				B34F574518668ED4003EDDAC /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B34F575A18668ED4003EDDAC /* LeapSynthTests */ = {
+			isa = PBXGroup;
+			children = (
+				B34F576018668ED4003EDDAC /* LeapSynthTests.m */,
+				B34F575B18668ED4003EDDAC /* Supporting Files */,
+			);
+			path = LeapSynthTests;
+			sourceTree = "<group>";
+		};
+		B34F575B18668ED4003EDDAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B34F575C18668ED4003EDDAC /* LeapSynthTests-Info.plist */,
+				B34F575D18668ED4003EDDAC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B34F573218668ED4003EDDAC /* LeapSynth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B34F576418668ED4003EDDAC /* Build configuration list for PBXNativeTarget "LeapSynth" */;
+			buildPhases = (
+				B34F572F18668ED4003EDDAC /* Sources */,
+				B34F573018668ED4003EDDAC /* Frameworks */,
+				B34F573118668ED4003EDDAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LeapSynth;
+			productName = LeapSynth;
+			productReference = B34F573318668ED4003EDDAC /* LeapSynth.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B34F575318668ED4003EDDAC /* LeapSynthTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B34F576718668ED4003EDDAC /* Build configuration list for PBXNativeTarget "LeapSynthTests" */;
+			buildPhases = (
+				B34F575018668ED4003EDDAC /* Sources */,
+				B34F575118668ED4003EDDAC /* Frameworks */,
+				B34F575218668ED4003EDDAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B34F575918668ED4003EDDAC /* PBXTargetDependency */,
+			);
+			name = LeapSynthTests;
+			productName = LeapSynthTests;
+			productReference = B34F575418668ED4003EDDAC /* LeapSynthTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B34F572B18668ED4003EDDAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LS;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Connor Smith";
+				TargetAttributes = {
+					B34F575318668ED4003EDDAC = {
+						TestTargetID = B34F573218668ED4003EDDAC;
+					};
+				};
+			};
+			buildConfigurationList = B34F572E18668ED4003EDDAC /* Build configuration list for PBXProject "LeapSynth" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B34F572A18668ED4003EDDAC;
+			productRefGroup = B34F573418668ED4003EDDAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B34F573218668ED4003EDDAC /* LeapSynth */,
+				B34F575318668ED4003EDDAC /* LeapSynthTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B34F573118668ED4003EDDAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34F574118668ED4003EDDAC /* InfoPlist.strings in Resources */,
+				B34F574F18668ED4003EDDAC /* Images.xcassets in Resources */,
+				B34F574718668ED4003EDDAC /* Credits.rtf in Resources */,
+				B34F574D18668ED4003EDDAC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B34F575218668ED4003EDDAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34F575F18668ED4003EDDAC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B34F572F18668ED4003EDDAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34F574318668ED4003EDDAC /* main.m in Sources */,
+				B34F574A18668ED4003EDDAC /* LSAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B34F575018668ED4003EDDAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34F576118668ED4003EDDAC /* LeapSynthTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B34F575918668ED4003EDDAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B34F573218668ED4003EDDAC /* LeapSynth */;
+			targetProxy = B34F575818668ED4003EDDAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B34F573F18668ED4003EDDAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B34F574018668ED4003EDDAC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B34F574518668ED4003EDDAC /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B34F574618668ED4003EDDAC /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		B34F574B18668ED4003EDDAC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B34F574C18668ED4003EDDAC /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		B34F575D18668ED4003EDDAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B34F575E18668ED4003EDDAC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B34F576218668ED4003EDDAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B34F576318668ED4003EDDAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B34F576518668ED4003EDDAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
+				INFOPLIST_FILE = "LeapSynth/LeapSynth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B34F576618668ED4003EDDAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
+				INFOPLIST_FILE = "LeapSynth/LeapSynth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		B34F576818668ED4003EDDAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LeapSynth.app/Contents/MacOS/LeapSynth";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LeapSynthTests/LeapSynthTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		B34F576918668ED4003EDDAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LeapSynth.app/Contents/MacOS/LeapSynth";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeapSynth/LeapSynth-Prefix.pch";
+				INFOPLIST_FILE = "LeapSynthTests/LeapSynthTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B34F572E18668ED4003EDDAC /* Build configuration list for PBXProject "LeapSynth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B34F576218668ED4003EDDAC /* Debug */,
+				B34F576318668ED4003EDDAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B34F576418668ED4003EDDAC /* Build configuration list for PBXNativeTarget "LeapSynth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B34F576518668ED4003EDDAC /* Debug */,
+				B34F576618668ED4003EDDAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B34F576718668ED4003EDDAC /* Build configuration list for PBXNativeTarget "LeapSynthTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B34F576818668ED4003EDDAC /* Debug */,
+				B34F576918668ED4003EDDAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B34F572B18668ED4003EDDAC /* Project object */;
+}
