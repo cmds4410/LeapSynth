@@ -17,10 +17,15 @@ using namespace Tonic;
 
 @property (strong, nonatomic) LeapController *leapController;
 @property (weak, nonatomic) TonicSynthManager *synthManager;
+@property (assign, nonatomic) BOOL isPlayingTone;
+@property (assign, nonatomic) Synth leapSynth;
+@property (assign, nonatomic) int currentPitch;
 
 - (void)configureLeapMotion;
 - (void)configureSynth;
 - (void)toggleTone;
+- (void)updatePitch:(int)pitch;
+
 - (NSString *)stringForState:(LeapGestureState)state;
 
 @end
@@ -57,38 +62,68 @@ using namespace Tonic;
 
 - (void)toggleTone
 {
-    Synth mySynth = Synth();
+    if (!self.isPlayingTone)
+    {
+        self.leapSynth = Synth();
+        
+        self.currentPitch = 60;
+        
+        [self.synthManager addSynth:self.leapSynth forKey:@"mySynth"];
+        
+        ControlMetro metro = ControlMetro().bpm(200);
+        ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
+        
+        //Tonic is a collection of signal generators and processors
+        SineWave sinusoid = SineWave().freq(mtof(self.currentPitch));
+        SineWave vibrato = SineWave().freq(10);
+        SineWave tremelo = SineWave().freq(1);
+        
+        Noise click = Noise();
+        
+        ADSR env = ADSR()
+        .attack(.0001)
+        .decay( 0.05 )
+        .sustain(0.8)
+        .release(0.4)
+        .doesSustain(true)
+        .trigger(1);
+        
+        //that you can combine using intuitive operators
+        Generator combinedSignal = sinusoid * env;
+        
+        self.leapSynth.setOutputGen(combinedSignal);
+        self.isPlayingTone = YES;
+    }
+    else
+    {
+//        [self.synthManager removeSynthForKey:@"mySynth"];
+//        self.isPlayingTone = NO;
+        [self updatePitch:0];
+    }
+}
+
+- (void)updatePitch:(int)pitch
+{
+    self.currentPitch++;
     
-    [self.synthManager addSynth:mySynth forKey:@"mySynth"];
-    
-    ControlMetro metro = ControlMetro().bpm(200);
-    ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
-    
-    //Tonic is a collection of signal generators and processors
-    TriangleWave tone1 = TriangleWave();
-    SineWave tone2 = SineWave().freq(mtof(60));
+    SineWave sinusoid = SineWave().freq(mtof(self.currentPitch));
     SineWave vibrato = SineWave().freq(10);
     SineWave tremelo = SineWave().freq(1);
-    //    ControlMidiToFreq
+    
     Noise click = Noise();
     
     ADSR env = ADSR()
     .attack(.0001)
     .decay( 0.05 )
-    .sustain(0)
-    .release(0)
-    .doesSustain(false)
+    .sustain(0.8)
+    .release(0.4)
+    .doesSustain(true)
     .trigger(1);
     
     //that you can combine using intuitive operators
-    Generator combinedSignal = (tone1 + tone2) * tremelo;
-    Generator triangle = tone1;
+    Generator combinedSignal = sinusoid * env;
     
-    Generator clickGen;
-    
-    clickGen = tone2 * env;
-    
-    mySynth.setOutputGen(clickGen);
+    self.leapSynth.setOutputGen(combinedSignal);
 }
 
 #pragma mark - LeapListener
@@ -108,6 +143,42 @@ using namespace Tonic;
     
     // The most recent frame
     LeapFrame *frame = [aController frame:0];
+    
+    if ([[frame hands] count] != 0) {
+        // Get the first hand
+        LeapHand *hand = [[frame hands] objectAtIndex:0];
+        
+        // Check if the hand has any fingers
+        NSArray *fingers = [hand fingers];
+        if ([fingers count] != 0) {
+            // Calculate the hand's average finger tip position
+            LeapVector *avgPos = [[LeapVector alloc] init];
+            for (int i = 0; i < [fingers count]; i++) {
+                LeapFinger *finger = [fingers objectAtIndex:i];
+                avgPos = [avgPos plus:[finger tipPosition]];
+            }
+            avgPos = [avgPos divide:[fingers count]];
+             NSLog(@"Hand has %ld fingers, average finger tip position %@",
+             [fingers count], avgPos);
+        }
+        
+        // Get the hand's sphere radius and palm position
+        /*
+         NSLog(@"Hand sphere radius: %f mm, palm position: %@",
+         [hand sphereRadius], [hand palmPosition]);
+         
+         // Get the hand's normal vector and direction
+         const LeapVector *normal = [hand palmNormal];
+         const LeapVector *direction = [hand direction];
+         
+         // Calculate the hand's pitch, roll, and yaw angles
+         
+         NSLog(@"Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n",
+         [direction pitch] * LEAP_RAD_TO_DEG,
+         [normal roll] * LEAP_RAD_TO_DEG,
+         [direction yaw] * LEAP_RAD_TO_DEG);
+         */
+    }
     
     // the most recent gesture
     NSArray *gestures = [frame gestures:nil];
