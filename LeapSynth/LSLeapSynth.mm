@@ -11,6 +11,8 @@
 #import "TonicSynthManager.h"
 #include "Tonic.h"
 
+#define kLSLeapSynthNumSinusoids        10
+
 using namespace Tonic;
 
 @interface LSLeapSynth () <LeapListener>
@@ -20,6 +22,7 @@ using namespace Tonic;
 @property (assign, nonatomic) BOOL isPlayingTone;
 @property (assign, nonatomic) Synth leapSynth;
 @property (assign, nonatomic) int currentPitch;
+@property (assign, nonatomic) Synth lotsOfSinusoids;
 
 - (void)configureLeapMotion;
 - (void)configureSynth;
@@ -56,74 +59,26 @@ using namespace Tonic;
     self.synthManager = [TonicSynthManager sharedManager];
     
     [self.synthManager startSession];
-}
-
-#pragma mark - Tonic
-
-- (void)toggleTone
-{
-    if (!self.isPlayingTone)
-    {
-        self.leapSynth = Synth();
+    
+    self.lotsOfSinusoids = Synth();
+    
+    [self.synthManager addSynth:self.lotsOfSinusoids forKey:@"lotsOfSinusoids"];
+    
+    ControlParameter pitch = self.lotsOfSinusoids.addParameter("pitch",0);
+    
+    Adder outputAdder;
+    
+    for (int s=0; s<kLSLeapSynthNumSinusoids; s++){
         
-        self.currentPitch = 60;
+        ControlGenerator pitchGen = ((pitch * 220 + 220) * powf(2, (s - (kLSLeapSynthNumSinusoids/2)) * 5.0f / 12.0f));
         
-        [self.synthManager addSynth:self.leapSynth forKey:@"mySynth"];
+        outputAdder.input(SineWave().freq( pitchGen.smoothed() ));
         
-        ControlMetro metro = ControlMetro().bpm(200);
-        ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
-        
-        //Tonic is a collection of signal generators and processors
-        SineWave sinusoid = SineWave().freq(mtof(self.currentPitch));
-        SineWave vibrato = SineWave().freq(10);
-        SineWave tremelo = SineWave().freq(1);
-        
-        Noise click = Noise();
-        
-        ADSR env = ADSR()
-        .attack(.0001)
-        .decay( 0.05 )
-        .sustain(0.8)
-        .release(0.4)
-        .doesSustain(true)
-        .trigger(1);
-        
-        //that you can combine using intuitive operators
-        Generator combinedSignal = sinusoid * env;
-        
-        self.leapSynth.setOutputGen(combinedSignal);
-        self.isPlayingTone = YES;
     }
-    else
-    {
-//        [self.synthManager removeSynthForKey:@"mySynth"];
-//        self.isPlayingTone = NO;
-        [self updatePitch:0];
-    }
-}
-
-- (void)updatePitch:(int)pitch
-{
-    self.currentPitch++;
     
-    SineWave sinusoid = SineWave().freq(mtof(self.currentPitch));
-    SineWave vibrato = SineWave().freq(10);
-    SineWave tremelo = SineWave().freq(1);
+    Generator outputGen = outputAdder * ((1.0f/kLSLeapSynthNumSinusoids) * 0.5f);
     
-    Noise click = Noise();
-    
-    ADSR env = ADSR()
-    .attack(.0001)
-    .decay( 0.05 )
-    .sustain(0.8)
-    .release(0.4)
-    .doesSustain(true)
-    .trigger(1);
-    
-    //that you can combine using intuitive operators
-    Generator combinedSignal = sinusoid * env;
-    
-    self.leapSynth.setOutputGen(combinedSignal);
+    self.lotsOfSinusoids.setOutputGen(outputGen);
 }
 
 #pragma mark - LeapListener
@@ -131,10 +86,10 @@ using namespace Tonic;
 - (void)onConnect:(NSNotification *)notification
 {
     LeapController *aController = (LeapController *)[notification object];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_CIRCLE enable:YES];
+    //    [aController enableGesture:LEAP_GESTURE_TYPE_CIRCLE enable:YES];
     [aController enableGesture:LEAP_GESTURE_TYPE_KEY_TAP enable:YES];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_SCREEN_TAP enable:YES];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
+    //    [aController enableGesture:LEAP_GESTURE_TYPE_SCREEN_TAP enable:YES];
+    //    [aController enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
 }
 
 - (void)onFrame:(NSNotification *)notification
@@ -149,34 +104,46 @@ using namespace Tonic;
         LeapHand *hand = [[frame hands] objectAtIndex:0];
         
         // Check if the hand has any fingers
-        NSArray *fingers = [hand fingers];
-        if ([fingers count] != 0) {
-            // Calculate the hand's average finger tip position
-            LeapVector *avgPos = [[LeapVector alloc] init];
-            for (int i = 0; i < [fingers count]; i++) {
-                LeapFinger *finger = [fingers objectAtIndex:i];
-                avgPos = [avgPos plus:[finger tipPosition]];
-            }
-            avgPos = [avgPos divide:[fingers count]];
-             NSLog(@"Hand has %ld fingers, average finger tip position %@",
-             [fingers count], avgPos);
-        }
+        /*
+         NSArray *fingers = [hand fingers];
+         if ([fingers count] != 0) {
+         // Calculate the hand's average finger tip position
+         LeapVector *avgPos = [[LeapVector alloc] init];
+         for (int i = 0; i < [fingers count]; i++) {
+         LeapFinger *finger = [fingers objectAtIndex:i];
+         avgPos = [avgPos plus:[finger tipPosition]];
+         }
+         avgPos = [avgPos divide:[fingers count]];
+         NSLog(@"Hand has %ld fingers, average finger tip position %@",
+         [fingers count], avgPos);
+         }
+         */
         
         // Get the hand's sphere radius and palm position
         /*
-         NSLog(@"Hand sphere radius: %f mm, palm position: %@",
-         [hand sphereRadius], [hand palmPosition]);
-         
-         // Get the hand's normal vector and direction
-         const LeapVector *normal = [hand palmNormal];
-         const LeapVector *direction = [hand direction];
-         
-         // Calculate the hand's pitch, roll, and yaw angles
-         
-         NSLog(@"Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n",
-         [direction pitch] * LEAP_RAD_TO_DEG,
-         [normal roll] * LEAP_RAD_TO_DEG,
-         [direction yaw] * LEAP_RAD_TO_DEG);
+        NSLog(@"Hand sphere radius: %f mm, palm position: %@",
+              [hand sphereRadius], [hand palmPosition]);
+        */
+        
+        // Get the hand's normal vector and direction
+        const LeapVector *normal = [hand palmNormal];
+        const LeapVector *direction = [hand direction];
+        
+        // Normalize again for Tonic
+//        LeapVector *tonicNormalLeapVector = [[LeapVector alloc] init];
+        CGFloat tonicNormalY = 1.0f - Tonic::map(normal.y, -1, 1, 0, 1, true);
+        
+        NSLog(@"Normal.y: %f", tonicNormalY);
+        
+        self.lotsOfSinusoids.setParameter("pitch", normal.y);
+        
+        // Calculate the hand's pitch, roll, and yaw angles
+        
+        /*
+        NSLog(@"Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n",
+              [direction pitch] * LEAP_RAD_TO_DEG,
+              [normal roll] * LEAP_RAD_TO_DEG,
+              [direction yaw] * LEAP_RAD_TO_DEG);
          */
     }
     
@@ -220,7 +187,6 @@ using namespace Tonic;
                 NSLog(@"Key Tap id: %d, %@, position: %@, direction: %@",
                       keyTapGesture.id, [self stringForState:keyTapGesture.state],
                       keyTapGesture.position, keyTapGesture.direction);
-                [self toggleTone];
                 break;
             }
             case LEAP_GESTURE_TYPE_SCREEN_TAP: {
