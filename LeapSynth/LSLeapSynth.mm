@@ -13,6 +13,12 @@
 
 #define kLSLeapSynthNumSinusoids        10
 
+typedef enum
+{
+    LSLeapSynthModeSinusoids = 0,
+    LSLeapSynthModeFourier
+}LSLeapSynthMode;
+
 using namespace Tonic;
 
 @interface LSLeapSynth () <LeapListener>
@@ -26,8 +32,6 @@ using namespace Tonic;
 
 - (void)configureLeapMotion;
 - (void)configureSynth;
-- (void)toggleTone;
-- (void)updatePitch:(int)pitch;
 
 - (NSString *)stringForState:(LeapGestureState)state;
 
@@ -130,12 +134,12 @@ using namespace Tonic;
         const LeapVector *direction = [hand direction];
         
         // Normalize again for Tonic
-//        LeapVector *tonicNormalLeapVector = [[LeapVector alloc] init];
-        CGFloat tonicNormalY = 1.0f - Tonic::map(normal.y, -1, 1, 0, 1, true);
+        CGFloat tonicNormalY = Tonic::map(normal.y, -1, 1, 0, 10, true);
         
-        NSLog(@"Normal.y: %f", tonicNormalY);
+        NSLog(@"Normal.y: %f", normal.y);
+        NSLog(@"tonicNormalY: %f", tonicNormalY);
         
-        self.lotsOfSinusoids.setParameter("pitch", normal.y);
+        self.lotsOfSinusoids.setParameter("pitch", tonicNormalY);
         
         // Calculate the hand's pitch, roll, and yaw angles
         
