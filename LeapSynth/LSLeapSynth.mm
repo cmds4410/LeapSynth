@@ -29,11 +29,17 @@ using namespace Tonic;
 @property (strong, nonatomic) LeapController *leapController;
 @property (weak, nonatomic) TonicSynthManager *synthManager;
 @property (assign, nonatomic) Synth leapSynth;
+@property (assign, nonatomic) LSLeapSynthMode mode;
 
 - (void)configureLeapMotion;
 - (void)configureSynthWithMode:(LSLeapSynthMode)mode;
-
 - (NSString *)stringForState:(LeapGestureState)state;
+
+- (void)handleLeapEventWithVectors:(NSArray *)vectors;
+- (LeapVector *)normalTonicLeapVectorWithVector:(LeapVector *)vectorIn;
+- (TonicFloat)maxNormalX;
+- (TonicFloat)maxNormalY;
+- (TonicFloat)maxNormalZ;
 
 @end
 
@@ -42,7 +48,7 @@ using namespace Tonic;
 - (void)run
 {
     [self configureLeapMotion];
-    [self configureSynthWithMode:LSLeapSynthModeDubstep];
+    [self configureSynthWithMode:LSLeapSynthModeSinusoids];
 }
 
 - (void)dealloc
@@ -60,6 +66,8 @@ using namespace Tonic;
 
 - (void)configureSynthWithMode:(LSLeapSynthMode)mode
 {
+    self.mode = mode;
+    
     self.synthManager = [TonicSynthManager sharedManager];
     
     [self.synthManager startSession];
@@ -125,6 +133,119 @@ using namespace Tonic;
     [self.synthManager endSession];
 }
 
+#pragma mark - Leap -> Synth
+
+- (void)handleLeapEventWithVectors:(NSArray *)vectors
+{
+    switch (self.mode) {
+        case LSLeapSynthModeSinusoids:
+        {
+            id leapNormal = [vectors firstObject];
+            if ([leapNormal isKindOfClass:[LeapVector class]])
+            {
+                LeapVector *tonicNormal = [self normalTonicLeapVectorWithVector:leapNormal];
+                self.leapSynth.setParameter("pitch", tonicNormal.y);
+            }
+            break;
+        }
+        case LSLeapSynthModeDubstep:
+        {
+            id leapNormal = [vectors firstObject];
+            if ([leapNormal isKindOfClass:[LeapVector class]])
+            {
+                LeapVector *tonicNormal = [self normalTonicLeapVectorWithVector:leapNormal];
+                self.leapSynth.setParameter("pitch", tonicNormal.y);
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - Normal/Scale
+
+- (LeapVector *)normalTonicLeapVectorWithVector:(LeapVector *)vectorIn
+{
+    TonicFloat tonicNormalX = Tonic::map(vectorIn.x, -1, 1, 0, [self maxNormalX], true);
+    TonicFloat tonicNormalY = Tonic::map(vectorIn.y, -1, 1, 0, [self maxNormalY], true);
+    TonicFloat tonicNormalZ = Tonic::map(vectorIn.z, -1, 1, 0, [self maxNormalZ], true);
+    
+    LeapVector *vectorOut = [[LeapVector alloc] initWithX:tonicNormalX y:tonicNormalY z:tonicNormalZ];
+    
+    return vectorOut;
+}
+
+- (TonicFloat)maxNormalX
+{
+    TonicFloat ret = 0;
+    
+    switch (self.mode) {
+        case LSLeapSynthModeSinusoids:
+        {
+            ret = 10;
+            break;
+        }
+        case LSLeapSynthModeDubstep:
+        {
+            ret = 5;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    return ret;
+}
+
+- (TonicFloat)maxNormalY
+{
+    TonicFloat ret = 0;
+    
+    switch (self.mode) {
+        case LSLeapSynthModeSinusoids:
+        {
+            ret = 10;
+            break;
+        }
+        case LSLeapSynthModeDubstep:
+        {
+            ret = 5;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    return ret;
+}
+
+- (TonicFloat)maxNormalZ
+{
+    TonicFloat ret = 0;
+    
+    switch (self.mode) {
+        case LSLeapSynthModeSinusoids:
+        {
+            ret = 10;
+            break;
+        }
+        case LSLeapSynthModeDubstep:
+        {
+            ret = 5;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    return ret;
+}
+
 #pragma mark - LeapListener
 
 - (void)onConnect:(NSNotification *)notification
@@ -170,16 +291,11 @@ using namespace Tonic;
         */
         
         // Get the hand's normal vector and direction
-        const LeapVector *normal = [hand palmNormal];
-        const LeapVector *direction = [hand direction];
+        LeapVector *normal = [hand palmNormal];
+        LeapVector *direction = [hand direction];
         
-        // Normalize again for Tonic
-        CGFloat tonicNormalY = Tonic::map(normal.y, -1, 1, 0, 10, true);
-        
-        NSLog(@"Normal.y: %f", normal.y);
-        NSLog(@"tonicNormalY: %f", tonicNormalY);
-        
-        self.leapSynth.setParameter("pitch", tonicNormalY);
+        // Hand the normal off to be dealth with
+        [self handleLeapEventWithVectors:@[normal, direction]];
         
         // Calculate the hand's pitch, roll, and yaw angles
         
