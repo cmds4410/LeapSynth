@@ -21,4 +21,6 @@
 - (void)addSynth:(Tonic::Synth)synth forKey:(NSString*)key;
 - (void)removeSynthForKey:(NSString*)key;
 
+- (void)removeAllSynths;
+
 @end

@@ -147,7 +147,16 @@ using namespace Tonic;
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
-  
+}
+
+- (void)removeAllSynths
+{
+    for (id key in [self.synthDict allKeys])
+    {
+        Synth oldSynth = [[self.synthDict objectForKey:key] synth];
+        mixer.removeInput(oldSynth);
+        [self.synthDict removeObjectForKey:key];
+    }
 }
 
 @end

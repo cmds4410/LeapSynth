@@ -11,12 +11,15 @@
 #import "TonicSynthManager.h"
 #include "Tonic.h"
 
-#define kLSLeapSynthNumSinusoids        10
+#define kLSLeapSynthNumOscilatorsSinusoid           10
+#define kLSLeapSynthNumOscilatorsDubstep            5
+
+#define kLSTonicSynthManagerKeySinusoids @"lotsOfSinusoids"
 
 typedef enum
 {
     LSLeapSynthModeSinusoids = 0,
-    LSLeapSynthModeFourier
+    LSLeapSynthModeDubstep
 }LSLeapSynthMode;
 
 using namespace Tonic;
@@ -25,13 +28,10 @@ using namespace Tonic;
 
 @property (strong, nonatomic) LeapController *leapController;
 @property (weak, nonatomic) TonicSynthManager *synthManager;
-@property (assign, nonatomic) BOOL isPlayingTone;
 @property (assign, nonatomic) Synth leapSynth;
-@property (assign, nonatomic) int currentPitch;
-@property (assign, nonatomic) Synth lotsOfSinusoids;
 
 - (void)configureLeapMotion;
-- (void)configureSynth;
+- (void)configureSynthWithMode:(LSLeapSynthMode)mode;
 
 - (NSString *)stringForState:(LeapGestureState)state;
 
@@ -42,7 +42,7 @@ using namespace Tonic;
 - (void)run
 {
     [self configureLeapMotion];
-    [self configureSynth];
+    [self configureSynthWithMode:LSLeapSynthModeDubstep];
 }
 
 - (void)dealloc
@@ -58,31 +58,71 @@ using namespace Tonic;
     [self.leapController addListener:self];
 }
 
-- (void)configureSynth
+- (void)configureSynthWithMode:(LSLeapSynthMode)mode
 {
     self.synthManager = [TonicSynthManager sharedManager];
     
     [self.synthManager startSession];
     
-    self.lotsOfSinusoids = Synth();
+    Generator outputGen = nil;
     
-    [self.synthManager addSynth:self.lotsOfSinusoids forKey:@"lotsOfSinusoids"];
-    
-    ControlParameter pitch = self.lotsOfSinusoids.addParameter("pitch",0);
-    
-    Adder outputAdder;
-    
-    for (int s=0; s<kLSLeapSynthNumSinusoids; s++){
-        
-        ControlGenerator pitchGen = ((pitch * 220 + 220) * powf(2, (s - (kLSLeapSynthNumSinusoids/2)) * 5.0f / 12.0f));
-        
-        outputAdder.input(SineWave().freq( pitchGen.smoothed() ));
-        
+    switch (mode) {
+        case LSLeapSynthModeSinusoids:
+        {
+            self.leapSynth = Synth();
+            
+            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerKeySinusoids];
+            
+            ControlParameter pitch = self.leapSynth.addParameter("pitch",0);
+            
+            Adder outputAdder;
+            
+            for (int s=0; s<kLSLeapSynthNumOscilatorsSinusoid; s++){
+                
+                ControlGenerator pitchGen = ((pitch * 220 + 220) * powf(2, (s - (kLSLeapSynthNumOscilatorsSinusoid/2)) * 5.0f / 12.0f));
+                
+                outputAdder.input(SineWave().freq( pitchGen.smoothed() ));
+                
+            }
+            
+            outputGen = outputAdder * ((1.0f/kLSLeapSynthNumOscilatorsSinusoid) * 0.5f);
+            break;
+        }
+            
+        case LSLeapSynthModeDubstep:
+        {
+            self.leapSynth = Synth();
+            
+            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerKeySinusoids];
+            
+            ControlParameter pitch = self.leapSynth.addParameter("pitch",0);
+            
+            Adder outputAdder;
+            
+            for (int s=0; s<kLSLeapSynthNumOscilatorsDubstep; s++){
+                
+                ControlGenerator pitchGen = ((pitch * 220 + 20) * powf(2, (s - (kLSLeapSynthNumOscilatorsDubstep/2)) * 0.05f / 12.0f));
+                
+                outputAdder.input(SquareWave().freq( pitchGen.smoothed()) + SineWave().freq( pitchGen.smoothed()));
+            }
+            
+            outputGen = outputAdder * ((1.0f/(kLSLeapSynthNumOscilatorsDubstep)) * 0.5f);
+            break;
+        }
+            
+        default:
+            break;
     }
     
-    Generator outputGen = outputAdder * ((1.0f/kLSLeapSynthNumSinusoids) * 0.5f);
     
-    self.lotsOfSinusoids.setOutputGen(outputGen);
+    
+    self.leapSynth.setOutputGen(outputGen);
+}
+
+- (void)endCurrentSession
+{
+    [self.synthManager removeAllSynths];
+    [self.synthManager endSession];
 }
 
 #pragma mark - LeapListener
@@ -139,7 +179,7 @@ using namespace Tonic;
         NSLog(@"Normal.y: %f", normal.y);
         NSLog(@"tonicNormalY: %f", tonicNormalY);
         
-        self.lotsOfSinusoids.setParameter("pitch", tonicNormalY);
+        self.leapSynth.setParameter("pitch", tonicNormalY);
         
         // Calculate the hand's pitch, roll, and yaw angles
         
