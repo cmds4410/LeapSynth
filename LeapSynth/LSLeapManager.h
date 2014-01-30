@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kLSLeapManagerNotification;
+extern NSString * const kLSLeapManagerNotificationControllerKey;
+extern NSString * const kLSLeapManagerNotificationNumHandsKey;
+extern NSString * const kLSLeapManagerNotificationNumFingersKey;
+extern NSString * const kLSLeapManagerNotificationNumToolsKey;
+extern NSString * const kLSLeapManagerNotificationPalmPositionKey;
+extern NSString * const kLSLeapManagerNotificationPalmDirectionKey;
+extern NSString * const kLSLeapManagerNotificationSphereRadiusKey;
+extern NSString * const kLSLeapManagerNotificationHandPitchKey;
+extern NSString * const kLSLeapManagerNotificationHandRollKey;
+extern NSString * const kLSLeapManagerNotificationHandYawKey;
+
 @interface LSLeapManager : NSObject
 
 + (instancetype)sharedLeapManager;

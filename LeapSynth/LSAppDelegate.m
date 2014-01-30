@@ -20,6 +20,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [LSLeapManager sharedLeapManager];
     self.leapSynth = [[LSLeapSynth alloc] init];
     [self.leapSynth run];
 }

@@ -9,6 +9,18 @@
 #import "LSLeapManager.h"
 #import "LeapObjectiveC.h"
 
+NSString * const kLSLeapManagerNotification =                    @"LSLeapManagerNotification";
+NSString * const kLSLeapManagerNotificationControllerKey =       @"LSLeapManagerNotificationControllerKey";
+NSString * const kLSLeapManagerNotificationNumHandsKey =         @"LSLeapManagerNotificationNumHandsKey";
+NSString * const kLSLeapManagerNotificationNumFingersKey =       @"LSLeapManagerNotificationNumFingersKey";
+NSString * const kLSLeapManagerNotificationNumToolsKey =         @"LSLeapManagerNotificationNumToolsKey";
+NSString * const kLSLeapManagerNotificationPalmPositionKey =     @"LSLeapManagerNotificationPalmPositionKey";
+NSString * const kLSLeapManagerNotificationPalmDirectionKey =    @"LSLeapManagerNotificationPalmDirectionKey";
+NSString * const kLSLeapManagerNotificationSphereRadiusKey =     @"LSLeapManagerNotificationSphereRadiusKey";
+NSString * const kLSLeapManagerNotificationHandPitchKey =        @"LSLeapManagerNotificationHandPitchKey";
+NSString * const kLSLeapManagerNotificationHandRollKey =         @"LSLeapManagerNotificationHandRollKey";
+NSString * const kLSLeapManagerNotificationHandYawKey =          @"LSLeapManagerNotificationHandYawKey";
+
 @interface LSLeapManager () <LeapListener>
 
 @property (strong, nonatomic) LeapController *leapController;
@@ -75,10 +87,27 @@
 
 - (void)onFrame:(NSNotification *)notification
 {
+    // This will be the user info in our custom NSNotification
+    NSMutableDictionary *userInfoForNotification = [[NSMutableDictionary alloc] init];
+    
     LeapController *aController = (LeapController *)[notification object];
+    
+    // I'm adding this to the dictionary just in case the listener needs to do some custom handling of ther Leap Data
+    // In order to make use of it, then listener will have to know the Leap API itself, which is not the intention of this manager
+    [userInfoForNotification setObject:aController forKey:kLSLeapManagerNotificationControllerKey];
     
     // Get the most recent frame and report some basic information
     LeapFrame *frame = [aController frame:0];
+    
+    // set the number of hands on the userInfo
+    [userInfoForNotification setObject:@([[frame hands] count]) forKey:kLSLeapManagerNotificationNumHandsKey];
+    
+    // set the number of fingers on the userInfo
+    [userInfoForNotification setObject:@([[frame fingers] count]) forKey:kLSLeapManagerNotificationNumFingersKey];
+    
+    // set the number of tools on the userInfo
+    [userInfoForNotification setObject:@([[frame tools] count]) forKey:kLSLeapManagerNotificationNumToolsKey];
+    
     /*
     NSLog(@"Frame id: %lld, timestamp: %lld, hands: %ld, fingers: %ld, tools: %ld, gestures: %ld",
           [frame id], [frame timestamp], [[frame hands] count],
@@ -89,8 +118,41 @@
         // Get the first hand
         LeapHand *hand = [[frame hands] objectAtIndex:0];
         
+        // Get the hand's normal vector and direction
+        LeapVector *normal = [hand palmNormal];
+        LeapVector *direction = [hand direction];
+        NSNumber *sphereRadius = @([hand sphereRadius]);
+        NSNumber *degreesPitch = @([direction pitch]);
+        NSNumber *degreesRoll = @([normal roll]);
+        NSNumber *degreesYaw = @([direction yaw]);
+        
+        [userInfoForNotification setObject:normal forKey:kLSLeapManagerNotificationPalmPositionKey];
+        [userInfoForNotification setObject:direction forKey:kLSLeapManagerNotificationPalmDirectionKey];
+        [userInfoForNotification setObject:sphereRadius forKey:kLSLeapManagerNotificationSphereRadiusKey];
+        [userInfoForNotification setObject:degreesPitch forKey:kLSLeapManagerNotificationHandPitchKey];
+        [userInfoForNotification setObject:degreesRoll forKey:kLSLeapManagerNotificationHandRollKey];
+        [userInfoForNotification setObject:degreesYaw forKey:kLSLeapManagerNotificationHandYawKey];
+        
+        // Get the hand's sphere radius and palm position
+        /*
+         NSLog(@"Hand sphere radius: %f mm, palm position: %@",
+         [hand sphereRadius], [hand palmPosition]);
+         
+         // Get the hand's normal vector and direction
+         const LeapVector *normal = [hand palmNormal];
+         const LeapVector *direction = [hand direction];
+         
+         // Calculate the hand's pitch, roll, and yaw angles
+         
+         NSLog(@"Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n",
+         [direction pitch] * LEAP_RAD_TO_DEG,
+         [normal roll] * LEAP_RAD_TO_DEG,
+         [direction yaw] * LEAP_RAD_TO_DEG);
+         */
+        
         // Check if the hand has any fingers
         NSArray *fingers = [hand fingers];
+        
         if ([fingers count] != 0) {
             // Calculate the hand's average finger tip position
             LeapVector *avgPos = [[LeapVector alloc] init];
@@ -103,24 +165,8 @@
             NSLog(@"Hand has %ld fingers, average finger tip position %@",
                   [fingers count], avgPos);
              */
+            
         }
-        
-        // Get the hand's sphere radius and palm position
-        /*
-        NSLog(@"Hand sphere radius: %f mm, palm position: %@",
-              [hand sphereRadius], [hand palmPosition]);
-        
-        // Get the hand's normal vector and direction
-        const LeapVector *normal = [hand palmNormal];
-        const LeapVector *direction = [hand direction];
-        
-        // Calculate the hand's pitch, roll, and yaw angles
-         
-        NSLog(@"Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n",
-              [direction pitch] * LEAP_RAD_TO_DEG,
-              [normal roll] * LEAP_RAD_TO_DEG,
-              [direction yaw] * LEAP_RAD_TO_DEG);
-         */
     }
     
     NSArray *gestures = [frame gestures:nil];
@@ -181,6 +227,8 @@
         NSLog(@" ");
     }
      */
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TestNotification" object:self userInfo:userInfoForNotification];
 }
 
 - (void)onFocusGained:(NSNotification *)notification

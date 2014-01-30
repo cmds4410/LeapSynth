@@ -10,16 +10,18 @@
 #import "LeapObjectiveC.h"
 #import "TonicSynthManager.h"
 #include "Tonic.h"
+#import "LSLeapManager.h"
 
 #define kLSLeapSynthNumOscilatorsSinusoid           10
 #define kLSLeapSynthNumOscilatorsDubstep            5
 
-#define kLSTonicSynthManagerKeySinusoids @"lotsOfSinusoids"
+#define kLSTonicSynthManagerSynthKey                @"mySynth"
 
 typedef enum
 {
     LSLeapSynthModeSinusoids = 0,
-    LSLeapSynthModeDubstep
+    LSLeapSynthModeDubstep,
+    LSLeapSynthModeParamsTest
 }LSLeapSynthMode;
 
 using namespace Tonic;
@@ -47,13 +49,64 @@ using namespace Tonic;
 
 - (void)run
 {
-    [self configureLeapMotion];
-    [self configureSynthWithMode:LSLeapSynthModeSinusoids];
+//    [self configureLeapMotion];
+    [self configureSynthWithMode:LSLeapSynthModeParamsTest];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveLeapNotification:)
+                                                 name:@"TestNotification"
+                                               object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"TestNotification" object:self];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)receiveLeapNotification:(NSNotification *)notification
+{
+    if (notification)
+    {
+        NSNumber *numHands = [notification.userInfo objectForKey:kLSLeapManagerNotificationNumHandsKey];
+        LeapVector *palmPosition = [self normalTonicLeapVectorWithVector:[notification.userInfo objectForKey:kLSLeapManagerNotificationPalmPositionKey]];
+        LeapVector *palmDirection = [notification.userInfo objectForKey:kLSLeapManagerNotificationPalmDirectionKey];
+        NSLog(@"Direction: %@", palmDirection);
+//        ControlGenerator outputGen = ControlGenerator();
+        
+//        ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
+        /*
+        TonicFloat freq =
+        
+        Generator tone = SquareWaveBL().freq(
+                                             freq * 0.25 + 100
+                                             + 400
+                                             ) * SineWave().freq(500);
+        ADSR env = ADSR()
+        .attack(0.1)
+        .decay( 0.4 )
+        .sustain(0)
+        .release(0)
+        .doesSustain(false)
+        .trigger(metro);
+        
+        StereoDelay delay = StereoDelay(3.0f,3.0f)
+        .delayTimeLeft( 0.5 + SineWave().freq(0.2) * 0.1)
+        .delayTimeRight(0.55 + SineWave().freq(0.23) * 0.11)
+        .feedback(0.3)
+        .dryLevel(0.8)
+        .wetLevel(0.8);
+        
+        Generator filterFreq = (SineWave().freq(0.1) + 1) * 1200 + 225;
+        
+        LPF24 filter = LPF24().Q(5).cutoff( filterFreq ).normalizesGain(false);
+        
+        Generator output = (( tone * env ) >> filter >> delay) * dBToLin(-30);
+        
+        outputGen = output;
+         */
+    }
 }
 
 #pragma mark - Configure
@@ -79,7 +132,7 @@ using namespace Tonic;
         {
             self.leapSynth = Synth();
             
-            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerKeySinusoids];
+            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerSynthKey];
             
             ControlParameter pitch = self.leapSynth.addParameter("pitch",0);
             
@@ -101,7 +154,7 @@ using namespace Tonic;
         {
             self.leapSynth = Synth();
             
-            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerKeySinusoids];
+            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerSynthKey];
             
             ControlParameter pitch = self.leapSynth.addParameter("pitch",0);
             
@@ -115,6 +168,46 @@ using namespace Tonic;
             }
             
             outputGen = outputAdder * ((1.0f/(kLSLeapSynthNumOscilatorsDubstep)) * 0.5f);
+            break;
+        }
+            
+        case LSLeapSynthModeParamsTest:
+        {
+            self.leapSynth = Synth();
+            
+            [self.synthManager addSynth:self.leapSynth forKey:kLSTonicSynthManagerSynthKey];
+            
+            ControlMetro metro = ControlMetro().bpm(200);
+            
+            ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
+            
+            Generator tone = SquareWaveBL().freq(
+                                                 freq * 0.25 + 100
+                                                 + 400
+                                                 ) * SineWave().freq(500);
+            ADSR env = ADSR()
+            .attack(0.1)
+            .decay( 0.4 )
+            .sustain(0)
+            .release(0)
+            .doesSustain(false)
+            .trigger(metro);
+            
+            StereoDelay delay = StereoDelay(3.0f,3.0f)
+            .delayTimeLeft( 0.5 + SineWave().freq(0.2) * 0.1)
+            .delayTimeRight(0.55 + SineWave().freq(0.23) * 0.11)
+            .feedback(0.3)
+            .dryLevel(0.8)
+            .wetLevel(0.8);
+            
+            Generator filterFreq = (SineWave().freq(0.1) + 1) * 1200 + 225;
+            
+            LPF24 filter = LPF24().Q(5).cutoff( filterFreq ).normalizesGain(false);
+            
+            Generator output = (( tone * env ) >> filter >> delay) * dBToLin(-30);
+            
+            outputGen = output;
+            
             break;
         }
             
